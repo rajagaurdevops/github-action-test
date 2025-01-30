@@ -1,0 +1,22 @@
+name: raja workflows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  kaushal-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nginx Installation
+        run: |
+          sudo apt update
+          sudo apt install net-tools
+          sudo apt install nginx -y
+          sudo systemctl start nginx
+          sudo systemctl status nginx
+          sudo netstat -plunt
