@@ -1,0 +1,35 @@
+name: Grafana Installation
+
+on:
+  push:
+    branches:
+      - main   # or any branch you want
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+  pull_request:
+    branches:
+      - main  # or any branch you want
+
+jobs:
+  grafana-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install Grafana
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
+        sudo apt-get update
+        sudo apt-get install -y grafana
+
+    - name: Start Grafana service
+      run: |
+        sudo systemctl enable grafana-server
+        sudo systemctl start grafana-server
+
+    - name: Verify Grafana installation
+      run: |
+        sudo systemctl status grafana-server
