@@ -1,4 +1,4 @@
-name: Grafana Installation
+name: Grafana Installation test
 
 on:
   push:
