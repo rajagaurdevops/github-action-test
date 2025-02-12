@@ -1,4 +1,4 @@
-name: Grafana Installation testing
+name: Grafana Installation testing by raja gaur
 
 on:
   push:
