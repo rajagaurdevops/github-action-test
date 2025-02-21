@@ -1,13 +1,17 @@
-name: Terraform Deploy to AWS
+name: "Terraform EC2 Deployment"
 
 on:
   push:
     branches:
-      - main
+      - main  # Runs when code is pushed to main branch
+  workflow_dispatch: # Allows manual run from GitHub UI
+
+permissions:
+  contents: read
 
 jobs:
-  terraform:
-    name: Terraform Deployment
+  deploy:
+    name: "Deploy EC2 with Terraform"
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +21,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0
+          terraform_version: 1.6.0  # Use latest version if needed
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
